@@ -1,0 +1,28 @@
+﻿<Window x:Class="lesson2_casino.MainWindow"
+        
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:lesson2_casino"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        WindowStyle="None"
+        WindowState="Maximized" 
+        mc:Ignorable="d" 
+        Title="MainWindow" Height="1080" Width="1920">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Frame x:Name="FrameSideBar" Background="#FF00123A"/>
+        <Image Source="/UIKIT/Background.png" Stretch="Fill" Grid.Column="1">
+            <Image.Effect>
+                <BlurEffect Radius="15" />
+            </Image.Effect>
+        </Image>
+        <Frame x:Name="FRAME" Content="Frame" HorizontalAlignment="Left" Source="" VerticalAlignment="Center" Grid.Column="1"  Navigated="FRAME_Navigated"/>
+    </Grid>
+</Window>

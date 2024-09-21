@@ -1,0 +1,36 @@
+﻿<Page x:Class="lesson2_casino.Pages.components.RegForm"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      xmlns:local="clr-namespace:lesson2_casino.Pages.components"
+      mc:Ignorable="d" 
+      d:DesignHeight="400" d:DesignWidth="438"
+      Title="RegForm">
+
+    <Border CornerRadius="15" Background="#7FFFFFFF">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Button x:Name="ButtonNav" Content="Вход" Height="62" VerticalAlignment="Top" FontSize="24" HorizontalAlignment="Stretch" Grid.Column="1" Click="ButtonNav_Click" Margin="0,10,0,0"/>
+            <Label Content="Регистрация" Grid.Column="1" Margin="0,80,0,0" FontSize="24" VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="Black" Background="{x:Null}"/>
+            <TextBox x:Name="LoginTxtBox" MinWidth="146" Grid.Column="1" MaxHeight="37" HorizontalAlignment="Center" Margin="0,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="146" Height="38" Grid.Row="1"/>
+            <ui:PasswordBox x:Name="PasswordTxtBox" MinWidth="146" Grid.Column="1" MaxHeight="37" HorizontalAlignment="Center" Margin="0,78,0,0" Grid.Row="1" VerticalAlignment="Top" Width="146" Height="38"/>
+            <Label Content="Логин" Grid.Column="1" FontSize="24" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="Black" Margin="0,116,0,0" Grid.RowSpan="2"/>
+            <Label Content="Пароль" Grid.Column="1" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="Black" Grid.Row="1"/>
+            <TextBox x:Name="KeyAdminTxtBox" MinWidth="146" Grid.Column="1" MaxHeight="37" HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" Width="146" Height="36" Visibility="Hidden"/>
+            <Label x:Name="LabelKeyAdmin" Content="Ключ админа" Grid.Column="1" FontSize="24" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="Black" Grid.Row="2" Margin="0,26,0,0" Visibility="Hidden"/>
+            <CheckBox x:Name="CheckBoxAdmin" Unchecked="CheckBoxAdmin_Unchecked" Grid.Column="1" Content="Я админ" Grid.Row="1" VerticalAlignment="Top" Height="15" Checked="CheckBoxAdmin_Checked" RenderTransformOrigin="0.5,0.292" Margin="0,123,0,0" Grid.RowSpan="2"/>
+            <Button x:Name="LogInButton" Content="Зарегестрироваться" Height="34" Margin="132,85,0,0" Grid.Row="2" VerticalAlignment="Top" Width="179" Click="LogInButton_Click" Grid.ColumnSpan="3"/>
+        </Grid>
+    </Border>
+</Page>

@@ -1,0 +1,44 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:lesson2_casino.Pages.User.HistoryOfTransactionsUser"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" x:Class="lesson2_casino.Pages.User.HistoryOfTransactionsUser.HistoryOfTransactions"
+      mc:Ignorable="d" 
+      d:DesignHeight="1080" d:DesignWidth="1320"
+      Title="HistoryOfTransactions" Height="1080" Width="1320">
+
+    <Grid>
+
+        <ui:Button x:Name="GoBackbtn" Height="86" Width="277" Click="GoBackbtn_Click" Margin="82,34,0,0" VerticalAlignment="Top">
+            <TextBlock Text="← Вернуться назад" FontSize="28"/>
+        </ui:Button>
+        <ListView Name="ListHistoryGames" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Margin="125,151,96,478">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Name_Transaction}" Value="Вывод">
+                            <Setter Property="Background" Value="Yellow"/>
+                            <Setter Property="Foreground" Value="Black"/>
+                            <!-- Устанавливаем белый цвет текста -->
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Name_Transaction}" Value="Пополнение">
+                            <Setter Property="Background" Value="Green"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <!-- Устанавливаем белый цвет текста -->
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=ID_Transaction}" Width="120" Header="Айди Транзакции"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Name_Transaction}" Width="300" Header="Операция"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Sum_of_withdrawal}" Width="300" Header="Сумма"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Date}" Width="300" Header="Дата"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Page>

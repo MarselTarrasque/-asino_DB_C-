@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d649f8f19c5d4e37b95145ad3fbd86f4" Name="Diagram1">
+        <EntityTypeShape EntityType="Casino_Vulkan0oModel.Bank" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Casino_Vulkan0oModel.Client" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Casino_Vulkan0oModel.History_Of_Matches" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Casino_Vulkan0oModel.History_of_rounds" Width="1.5" PointX="7.5" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Casino_Vulkan0oModel.Matches" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Casino_Vulkan0oModel.Replenishment_transaction" Width="1.5" PointX="7.5" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Casino_Vulkan0oModel.Roles" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Casino_Vulkan0oModel.rounds" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Casino_Vulkan0oModel.sysdiagrams" Width="1.5" PointX="9.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Casino_Vulkan0oModel.Transaction" Width="1.5" PointX="5.25" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="Casino_Vulkan0oModel.Withdrawal_Transaction" Width="1.5" PointX="7.5" PointY="9.5" IsExpanded="true" />
+        <AssociationConnector Association="Casino_Vulkan0oModel.FK_Client_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="Casino_Vulkan0oModel.FK_History_Of_Matches_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="Casino_Vulkan0oModel.FK_Transaction_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="Casino_Vulkan0oModel.FK_History_Of_Matches_Matches" ManuallyRouted="false" />
+        <AssociationConnector Association="Casino_Vulkan0oModel.FK_History_of_rounds_History_Of_Matches" ManuallyRouted="false" />
+        <AssociationConnector Association="Casino_Vulkan0oModel.FK_History_of_rounds_rounds1" ManuallyRouted="false" />
+        <AssociationConnector Association="Casino_Vulkan0oModel.FK_rounds_Matches" ManuallyRouted="false" />
+        <AssociationConnector Association="Casino_Vulkan0oModel.FK_Replenishment_transaction_Transaction" ManuallyRouted="false" />
+        <AssociationConnector Association="Casino_Vulkan0oModel.FK_Withdrawal_Transaction_Transaction" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

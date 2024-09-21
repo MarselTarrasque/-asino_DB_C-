@@ -1,0 +1,700 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище Casino_Vulkan0oModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bank">
+          <Key>
+            <PropertyRef Name="ID_bank" />
+          </Key>
+          <Property Name="ID_bank" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_bank" Type="nvarchar" MaxLength="40" />
+          <Property Name="WebsiteURL" Type="nvarchar" MaxLength="40" />
+          <Property Name="ZipCode" Type="nvarchar" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="ID_Client" />
+          </Key>
+          <Property Name="ID_Client" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="40" />
+          <Property Name="Password" Type="nvarchar" MaxLength="40" />
+          <Property Name="Date_of_registration" Type="date" />
+          <Property Name="Balance" Type="float" />
+          <Property Name="Id_Role" Type="int" />
+        </EntityType>
+        <EntityType Name="History_Of_Matches">
+          <Key>
+            <PropertyRef Name="ID_History_of_Match" />
+          </Key>
+          <Property Name="ID_History_of_Match" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Match" Type="int" />
+          <Property Name="ID_Client_Contested_History_of_Matches" Type="int" />
+          <Property Name="Total_Win_History_Of_Match" Type="float" />
+        </EntityType>
+        <EntityType Name="History_of_rounds">
+          <Key>
+            <PropertyRef Name="ID_history_of_round" />
+          </Key>
+          <Property Name="ID_history_of_round" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_round" Type="int" />
+          <Property Name="Bet_round" Type="float" />
+          <Property Name="Coefficent" Type="float" />
+          <Property Name="Exodus_of_round" Type="nvarchar" MaxLength="40" />
+          <Property Name="Reward" Type="float" />
+          <Property Name="ID_history_of_match" Type="int" />
+        </EntityType>
+        <EntityType Name="Matches">
+          <Key>
+            <PropertyRef Name="ID_Mactch" />
+          </Key>
+          <Property Name="ID_Mactch" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Quantity_of_rounds" Type="int" />
+          <Property Name="deposit" Type="float" />
+          <Property Name="Total_win" Type="float" />
+          <Property Name="Date_Of_Matches" Type="date" />
+        </EntityType>
+        <EntityType Name="Replenishment transaction">
+          <Key>
+            <PropertyRef Name="ID_Replenishment_Transaction" />
+          </Key>
+          <Property Name="ID_Replenishment_Transaction" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sum" Type="float" />
+          <Property Name="Name_Transaction" Type="nvarchar" MaxLength="50" />
+          <Property Name="Id_trasaction" Type="int" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="ID_Role" />
+          </Key>
+          <Property Name="ID_Role" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_Role" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="rounds">
+          <Key>
+            <PropertyRef Name="ID_round" />
+          </Key>
+          <Property Name="ID_round" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_match" Type="int" />
+          <Property Name="Bet_rounds" Type="float" />
+          <Property Name="Coefficent" Type="float" />
+          <Property Name="Exodus_of_round" Type="nvarchar" MaxLength="40" />
+          <Property Name="Reward" Type="float" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Transaction">
+          <Key>
+            <PropertyRef Name="Id_trasaction" />
+          </Key>
+          <Property Name="Id_trasaction" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Client" Type="int" />
+          <Property Name="Date_Of_Transaction" Type="date" />
+        </EntityType>
+        <EntityType Name="Withdrawal Transaction">
+          <Key>
+            <PropertyRef Name="ID_of_withdrawal" />
+          </Key>
+          <Property Name="ID_of_withdrawal" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sum" Type="float" />
+          <Property Name="Name_Transaction" Type="nvarchar" MaxLength="50" />
+          <Property Name="Id_trasaction" Type="int" />
+        </EntityType>
+        <Association Name="FK_Client_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="ID_Role" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="Id_Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_History_Of_Matches_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="History_Of_Matches" Type="Self.History_Of_Matches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ID_Client" />
+            </Principal>
+            <Dependent Role="History_Of_Matches">
+              <PropertyRef Name="ID_Client_Contested_History_of_Matches" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_History_Of_Matches_Matches">
+          <End Role="Matches" Type="Self.Matches" Multiplicity="0..1" />
+          <End Role="History_Of_Matches" Type="Self.History_Of_Matches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Matches">
+              <PropertyRef Name="ID_Mactch" />
+            </Principal>
+            <Dependent Role="History_Of_Matches">
+              <PropertyRef Name="ID_Match" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_History_of_rounds_History_Of_Matches">
+          <End Role="History_Of_Matches" Type="Self.History_Of_Matches" Multiplicity="0..1" />
+          <End Role="History_of_rounds" Type="Self.History_of_rounds" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="History_Of_Matches">
+              <PropertyRef Name="ID_History_of_Match" />
+            </Principal>
+            <Dependent Role="History_of_rounds">
+              <PropertyRef Name="ID_history_of_match" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_History_of_rounds_rounds1">
+          <End Role="rounds" Type="Self.rounds" Multiplicity="0..1" />
+          <End Role="History_of_rounds" Type="Self.History_of_rounds" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rounds">
+              <PropertyRef Name="ID_round" />
+            </Principal>
+            <Dependent Role="History_of_rounds">
+              <PropertyRef Name="ID_round" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Replenishment transaction_Transaction">
+          <End Role="Transaction" Type="Self.Transaction" Multiplicity="0..1" />
+          <End Role="Replenishment transaction" Type="Self.Replenishment transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transaction">
+              <PropertyRef Name="Id_trasaction" />
+            </Principal>
+            <Dependent Role="Replenishment transaction">
+              <PropertyRef Name="Id_trasaction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rounds_Matches">
+          <End Role="Matches" Type="Self.Matches" Multiplicity="0..1" />
+          <End Role="rounds" Type="Self.rounds" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Matches">
+              <PropertyRef Name="ID_Mactch" />
+            </Principal>
+            <Dependent Role="rounds">
+              <PropertyRef Name="ID_match" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transaction_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="Transaction" Type="Self.Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ID_Client" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="Id_Client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Withdrawal Transaction_Transaction">
+          <End Role="Transaction" Type="Self.Transaction" Multiplicity="0..1" />
+          <End Role="Withdrawal Transaction" Type="Self.Withdrawal Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transaction">
+              <PropertyRef Name="Id_trasaction" />
+            </Principal>
+            <Dependent Role="Withdrawal Transaction">
+              <PropertyRef Name="Id_trasaction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище Casino_Vulkan0oModelContainer">
+          <EntitySet Name="Bank" EntityType="Self.Bank" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="History_Of_Matches" EntityType="Self.History_Of_Matches" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="History_of_rounds" EntityType="Self.History_of_rounds" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Matches" EntityType="Self.Matches" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Replenishment transaction" EntityType="Self.Replenishment transaction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rounds" EntityType="Self.rounds" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transaction" EntityType="Self.Transaction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Withdrawal Transaction" EntityType="Self.Withdrawal Transaction" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Client_Roles" Association="Self.FK_Client_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_History_Of_Matches_Client" Association="Self.FK_History_Of_Matches_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="History_Of_Matches" EntitySet="History_Of_Matches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_History_Of_Matches_Matches" Association="Self.FK_History_Of_Matches_Matches">
+            <End Role="Matches" EntitySet="Matches" />
+            <End Role="History_Of_Matches" EntitySet="History_Of_Matches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_History_of_rounds_History_Of_Matches" Association="Self.FK_History_of_rounds_History_Of_Matches">
+            <End Role="History_Of_Matches" EntitySet="History_Of_Matches" />
+            <End Role="History_of_rounds" EntitySet="History_of_rounds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_History_of_rounds_rounds1" Association="Self.FK_History_of_rounds_rounds1">
+            <End Role="rounds" EntitySet="rounds" />
+            <End Role="History_of_rounds" EntitySet="History_of_rounds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Replenishment transaction_Transaction" Association="Self.FK_Replenishment transaction_Transaction">
+            <End Role="Transaction" EntitySet="Transaction" />
+            <End Role="Replenishment transaction" EntitySet="Replenishment transaction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rounds_Matches" Association="Self.FK_rounds_Matches">
+            <End Role="Matches" EntitySet="Matches" />
+            <End Role="rounds" EntitySet="rounds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transaction_Client" Association="Self.FK_Transaction_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Transaction" EntitySet="Transaction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Withdrawal Transaction_Transaction" Association="Self.FK_Withdrawal Transaction_Transaction">
+            <End Role="Transaction" EntitySet="Transaction" />
+            <End Role="Withdrawal Transaction" EntitySet="Withdrawal Transaction" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Casino_Vulkan0oModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Bank">
+          <Key>
+            <PropertyRef Name="ID_bank" />
+          </Key>
+          <Property Name="ID_bank" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_bank" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="WebsiteURL" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="ZipCode" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="ID_Client" />
+          </Key>
+          <Property Name="ID_Client" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="Date_of_registration" Type="DateTime" Precision="0" />
+          <Property Name="Balance" Type="Double" />
+          <Property Name="Id_Role" Type="Int32" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK_Client_Roles" FromRole="Client" ToRole="Roles" />
+          <NavigationProperty Name="History_Of_Matches" Relationship="Self.FK_History_Of_Matches_Client" FromRole="Client" ToRole="History_Of_Matches" />
+          <NavigationProperty Name="Transaction" Relationship="Self.FK_Transaction_Client" FromRole="Client" ToRole="Transaction" />
+        </EntityType>
+        <EntityType Name="History_Of_Matches">
+          <Key>
+            <PropertyRef Name="ID_History_of_Match" />
+          </Key>
+          <Property Name="ID_History_of_Match" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Match" Type="Int32" />
+          <Property Name="ID_Client_Contested_History_of_Matches" Type="Int32" />
+          <Property Name="Total_Win_History_Of_Match" Type="Double" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_History_Of_Matches_Client" FromRole="History_Of_Matches" ToRole="Client" />
+          <NavigationProperty Name="Matches" Relationship="Self.FK_History_Of_Matches_Matches" FromRole="History_Of_Matches" ToRole="Matches" />
+          <NavigationProperty Name="History_of_rounds" Relationship="Self.FK_History_of_rounds_History_Of_Matches" FromRole="History_Of_Matches" ToRole="History_of_rounds" />
+        </EntityType>
+        <EntityType Name="History_of_rounds">
+          <Key>
+            <PropertyRef Name="ID_history_of_round" />
+          </Key>
+          <Property Name="ID_history_of_round" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_round" Type="Int32" />
+          <Property Name="Bet_round" Type="Double" />
+          <Property Name="Coefficent" Type="Double" />
+          <Property Name="Exodus_of_round" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="Reward" Type="Double" />
+          <Property Name="ID_history_of_match" Type="Int32" />
+          <NavigationProperty Name="History_Of_Matches" Relationship="Self.FK_History_of_rounds_History_Of_Matches" FromRole="History_of_rounds" ToRole="History_Of_Matches" />
+          <NavigationProperty Name="rounds" Relationship="Self.FK_History_of_rounds_rounds1" FromRole="History_of_rounds" ToRole="rounds" />
+        </EntityType>
+        <EntityType Name="Matches">
+          <Key>
+            <PropertyRef Name="ID_Mactch" />
+          </Key>
+          <Property Name="ID_Mactch" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Quantity_of_rounds" Type="Int32" />
+          <Property Name="deposit" Type="Double" />
+          <Property Name="Total_win" Type="Double" />
+          <Property Name="Date_Of_Matches" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="History_Of_Matches" Relationship="Self.FK_History_Of_Matches_Matches" FromRole="Matches" ToRole="History_Of_Matches" />
+          <NavigationProperty Name="rounds" Relationship="Self.FK_rounds_Matches" FromRole="Matches" ToRole="rounds" />
+        </EntityType>
+        <EntityType Name="Replenishment_transaction">
+          <Key>
+            <PropertyRef Name="ID_Replenishment_Transaction" />
+          </Key>
+          <Property Name="ID_Replenishment_Transaction" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sum" Type="Double" />
+          <Property Name="Name_Transaction" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Id_trasaction" Type="Int32" />
+          <NavigationProperty Name="Transaction" Relationship="Self.FK_Replenishment_transaction_Transaction" FromRole="Replenishment_transaction" ToRole="Transaction" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="ID_Role" />
+          </Key>
+          <Property Name="ID_Role" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Client_Roles" FromRole="Roles" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="rounds">
+          <Key>
+            <PropertyRef Name="ID_round" />
+          </Key>
+          <Property Name="ID_round" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_match" Type="Int32" />
+          <Property Name="Bet_rounds" Type="Double" />
+          <Property Name="Coefficent" Type="Double" />
+          <Property Name="Exodus_of_round" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="Reward" Type="Double" />
+          <NavigationProperty Name="History_of_rounds" Relationship="Self.FK_History_of_rounds_rounds1" FromRole="rounds" ToRole="History_of_rounds" />
+          <NavigationProperty Name="Matches" Relationship="Self.FK_rounds_Matches" FromRole="rounds" ToRole="Matches" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Transaction">
+          <Key>
+            <PropertyRef Name="Id_trasaction" />
+          </Key>
+          <Property Name="Id_trasaction" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Client" Type="Int32" />
+          <Property Name="Date_Of_Transaction" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Transaction_Client" FromRole="Transaction" ToRole="Client" />
+          <NavigationProperty Name="Replenishment_transaction" Relationship="Self.FK_Replenishment_transaction_Transaction" FromRole="Transaction" ToRole="Replenishment_transaction" />
+          <NavigationProperty Name="Withdrawal_Transaction" Relationship="Self.FK_Withdrawal_Transaction_Transaction" FromRole="Transaction" ToRole="Withdrawal_Transaction" />
+        </EntityType>
+        <EntityType Name="Withdrawal_Transaction">
+          <Key>
+            <PropertyRef Name="ID_of_withdrawal" />
+          </Key>
+          <Property Name="ID_of_withdrawal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sum" Type="Double" />
+          <Property Name="Name_Transaction" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Id_trasaction" Type="Int32" />
+          <NavigationProperty Name="Transaction" Relationship="Self.FK_Withdrawal_Transaction_Transaction" FromRole="Withdrawal_Transaction" ToRole="Transaction" />
+        </EntityType>
+        <Association Name="FK_Client_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="ID_Role" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="Id_Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_History_Of_Matches_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="History_Of_Matches" Type="Self.History_Of_Matches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ID_Client" />
+            </Principal>
+            <Dependent Role="History_Of_Matches">
+              <PropertyRef Name="ID_Client_Contested_History_of_Matches" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transaction_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="Transaction" Type="Self.Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ID_Client" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="Id_Client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_History_Of_Matches_Matches">
+          <End Role="Matches" Type="Self.Matches" Multiplicity="0..1" />
+          <End Role="History_Of_Matches" Type="Self.History_Of_Matches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Matches">
+              <PropertyRef Name="ID_Mactch" />
+            </Principal>
+            <Dependent Role="History_Of_Matches">
+              <PropertyRef Name="ID_Match" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_History_of_rounds_History_Of_Matches">
+          <End Role="History_Of_Matches" Type="Self.History_Of_Matches" Multiplicity="0..1" />
+          <End Role="History_of_rounds" Type="Self.History_of_rounds" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="History_Of_Matches">
+              <PropertyRef Name="ID_History_of_Match" />
+            </Principal>
+            <Dependent Role="History_of_rounds">
+              <PropertyRef Name="ID_history_of_match" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_History_of_rounds_rounds1">
+          <End Role="rounds" Type="Self.rounds" Multiplicity="0..1" />
+          <End Role="History_of_rounds" Type="Self.History_of_rounds" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rounds">
+              <PropertyRef Name="ID_round" />
+            </Principal>
+            <Dependent Role="History_of_rounds">
+              <PropertyRef Name="ID_round" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rounds_Matches">
+          <End Role="Matches" Type="Self.Matches" Multiplicity="0..1" />
+          <End Role="rounds" Type="Self.rounds" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Matches">
+              <PropertyRef Name="ID_Mactch" />
+            </Principal>
+            <Dependent Role="rounds">
+              <PropertyRef Name="ID_match" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Replenishment_transaction_Transaction">
+          <End Role="Transaction" Type="Self.Transaction" Multiplicity="0..1" />
+          <End Role="Replenishment_transaction" Type="Self.Replenishment_transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transaction">
+              <PropertyRef Name="Id_trasaction" />
+            </Principal>
+            <Dependent Role="Replenishment_transaction">
+              <PropertyRef Name="Id_trasaction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Withdrawal_Transaction_Transaction">
+          <End Role="Transaction" Type="Self.Transaction" Multiplicity="0..1" />
+          <End Role="Withdrawal_Transaction" Type="Self.Withdrawal_Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transaction">
+              <PropertyRef Name="Id_trasaction" />
+            </Principal>
+            <Dependent Role="Withdrawal_Transaction">
+              <PropertyRef Name="Id_trasaction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Casino_Vulkan0oEntities5" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bank" EntityType="Self.Bank" />
+          <EntitySet Name="Client" EntityType="Self.Client" />
+          <EntitySet Name="History_Of_Matches" EntityType="Self.History_Of_Matches" />
+          <EntitySet Name="History_of_rounds" EntityType="Self.History_of_rounds" />
+          <EntitySet Name="Matches" EntityType="Self.Matches" />
+          <EntitySet Name="Replenishment_transaction" EntityType="Self.Replenishment_transaction" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" />
+          <EntitySet Name="rounds" EntityType="Self.rounds" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Transaction" EntityType="Self.Transaction" />
+          <EntitySet Name="Withdrawal_Transaction" EntityType="Self.Withdrawal_Transaction" />
+          <AssociationSet Name="FK_Client_Roles" Association="Self.FK_Client_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_History_Of_Matches_Client" Association="Self.FK_History_Of_Matches_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="History_Of_Matches" EntitySet="History_Of_Matches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transaction_Client" Association="Self.FK_Transaction_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Transaction" EntitySet="Transaction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_History_Of_Matches_Matches" Association="Self.FK_History_Of_Matches_Matches">
+            <End Role="Matches" EntitySet="Matches" />
+            <End Role="History_Of_Matches" EntitySet="History_Of_Matches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_History_of_rounds_History_Of_Matches" Association="Self.FK_History_of_rounds_History_Of_Matches">
+            <End Role="History_Of_Matches" EntitySet="History_Of_Matches" />
+            <End Role="History_of_rounds" EntitySet="History_of_rounds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_History_of_rounds_rounds1" Association="Self.FK_History_of_rounds_rounds1">
+            <End Role="rounds" EntitySet="rounds" />
+            <End Role="History_of_rounds" EntitySet="History_of_rounds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rounds_Matches" Association="Self.FK_rounds_Matches">
+            <End Role="Matches" EntitySet="Matches" />
+            <End Role="rounds" EntitySet="rounds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Replenishment_transaction_Transaction" Association="Self.FK_Replenishment_transaction_Transaction">
+            <End Role="Transaction" EntitySet="Transaction" />
+            <End Role="Replenishment_transaction" EntitySet="Replenishment_transaction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Withdrawal_Transaction_Transaction" Association="Self.FK_Withdrawal_Transaction_Transaction">
+            <End Role="Transaction" EntitySet="Transaction" />
+            <End Role="Withdrawal_Transaction" EntitySet="Withdrawal_Transaction" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище Casino_Vulkan0oModelContainer" CdmEntityContainer="Casino_Vulkan0oEntities5">
+          <EntitySetMapping Name="Bank">
+            <EntityTypeMapping TypeName="Casino_Vulkan0oModel.Bank">
+              <MappingFragment StoreEntitySet="Bank">
+                <ScalarProperty Name="ID_bank" ColumnName="ID_bank" />
+                <ScalarProperty Name="Name_bank" ColumnName="Name_bank" />
+                <ScalarProperty Name="WebsiteURL" ColumnName="WebsiteURL" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Client">
+            <EntityTypeMapping TypeName="Casino_Vulkan0oModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="ID_Client" ColumnName="ID_Client" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Date_of_registration" ColumnName="Date_of_registration" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="Id_Role" ColumnName="Id_Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="History_Of_Matches">
+            <EntityTypeMapping TypeName="Casino_Vulkan0oModel.History_Of_Matches">
+              <MappingFragment StoreEntitySet="History_Of_Matches">
+                <ScalarProperty Name="ID_History_of_Match" ColumnName="ID_History_of_Match" />
+                <ScalarProperty Name="ID_Match" ColumnName="ID_Match" />
+                <ScalarProperty Name="ID_Client_Contested_History_of_Matches" ColumnName="ID_Client_Contested_History_of_Matches" />
+                <ScalarProperty Name="Total_Win_History_Of_Match" ColumnName="Total_Win_History_Of_Match" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="History_of_rounds">
+            <EntityTypeMapping TypeName="Casino_Vulkan0oModel.History_of_rounds">
+              <MappingFragment StoreEntitySet="History_of_rounds">
+                <ScalarProperty Name="ID_history_of_round" ColumnName="ID_history_of_round" />
+                <ScalarProperty Name="ID_round" ColumnName="ID_round" />
+                <ScalarProperty Name="Bet_round" ColumnName="Bet_round" />
+                <ScalarProperty Name="Coefficent" ColumnName="Coefficent" />
+                <ScalarProperty Name="Exodus_of_round" ColumnName="Exodus_of_round" />
+                <ScalarProperty Name="Reward" ColumnName="Reward" />
+                <ScalarProperty Name="ID_history_of_match" ColumnName="ID_history_of_match" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Matches">
+            <EntityTypeMapping TypeName="Casino_Vulkan0oModel.Matches">
+              <MappingFragment StoreEntitySet="Matches">
+                <ScalarProperty Name="ID_Mactch" ColumnName="ID_Mactch" />
+                <ScalarProperty Name="Quantity_of_rounds" ColumnName="Quantity_of_rounds" />
+                <ScalarProperty Name="deposit" ColumnName="deposit" />
+                <ScalarProperty Name="Total_win" ColumnName="Total_win" />
+                <ScalarProperty Name="Date_Of_Matches" ColumnName="Date_Of_Matches" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Replenishment_transaction">
+            <EntityTypeMapping TypeName="Casino_Vulkan0oModel.Replenishment_transaction">
+              <MappingFragment StoreEntitySet="Replenishment transaction">
+                <ScalarProperty Name="ID_Replenishment_Transaction" ColumnName="ID_Replenishment_Transaction" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
+                <ScalarProperty Name="Name_Transaction" ColumnName="Name_Transaction" />
+                <ScalarProperty Name="Id_trasaction" ColumnName="Id_trasaction" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="Casino_Vulkan0oModel.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="ID_Role" ColumnName="ID_Role" />
+                <ScalarProperty Name="Name_Role" ColumnName="Name_Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rounds">
+            <EntityTypeMapping TypeName="Casino_Vulkan0oModel.rounds">
+              <MappingFragment StoreEntitySet="rounds">
+                <ScalarProperty Name="ID_round" ColumnName="ID_round" />
+                <ScalarProperty Name="ID_match" ColumnName="ID_match" />
+                <ScalarProperty Name="Bet_rounds" ColumnName="Bet_rounds" />
+                <ScalarProperty Name="Coefficent" ColumnName="Coefficent" />
+                <ScalarProperty Name="Exodus_of_round" ColumnName="Exodus_of_round" />
+                <ScalarProperty Name="Reward" ColumnName="Reward" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Casino_Vulkan0oModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transaction">
+            <EntityTypeMapping TypeName="Casino_Vulkan0oModel.Transaction">
+              <MappingFragment StoreEntitySet="Transaction">
+                <ScalarProperty Name="Id_trasaction" ColumnName="Id_trasaction" />
+                <ScalarProperty Name="Id_Client" ColumnName="Id_Client" />
+                <ScalarProperty Name="Date_Of_Transaction" ColumnName="Date_Of_Transaction" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Withdrawal_Transaction">
+            <EntityTypeMapping TypeName="Casino_Vulkan0oModel.Withdrawal_Transaction">
+              <MappingFragment StoreEntitySet="Withdrawal Transaction">
+                <ScalarProperty Name="ID_of_withdrawal" ColumnName="ID_of_withdrawal" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
+                <ScalarProperty Name="Name_Transaction" ColumnName="Name_Transaction" />
+                <ScalarProperty Name="Id_trasaction" ColumnName="Id_trasaction" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
